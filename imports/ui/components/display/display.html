@@ -1,0 +1,25 @@
+<template name="display">
+  <div class="grid">
+    {{#each posts}}
+      {{> block}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="block">
+  <div class="grid-item">
+    <div class="grid-item-decoration">
+      <a href="{{link}}">
+        <img class="img-grid" src="{{image}}" onerror="this.src='data:image/png;base64,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'" />
+        <p class="item-description text-center" title="{{description}}">{{description}}</p>
+      </a>
+      <div class="item-tools">
+        <span class="item-username">{{posterName}}</span>
+        <button class="button-votes btn btn-theme">{{votes}} ^</button>
+      </div>
+      <div class="remove-button">
+        <i class="glyphicon glyphicon-remove"></i>
+      </div>
+    </div>
+  </div>
+</template>
