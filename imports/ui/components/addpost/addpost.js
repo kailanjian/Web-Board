@@ -8,7 +8,7 @@ Template.addpost.onCreated(function() {
   this.isLinkValidating = new ReactiveVar(false);
 
   this.validateLink = function(link) {
-    var pattern = /https?:\/\/[^\.]+\.[^\.]+\..+/
+    var pattern = /https?:\/\/[^\.]+\..+/
     this.isLinkValid.set(pattern.test(link));
   }
 
@@ -16,7 +16,7 @@ Template.addpost.onCreated(function() {
   this.isPictureValidating = new ReactiveVar(false);
   
   this.validatePicture = function(link) {
-    var pattern = /https?:\/\/[^\.]+\.[^\.]+\..+/
+    var pattern = /https?:\/\/[^\.]+\..+/
     this.isPictureValid.set(pattern.test(link));
   }
 

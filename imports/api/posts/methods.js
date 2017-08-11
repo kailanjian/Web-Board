@@ -23,7 +23,9 @@ Meteor.methods({
   },
   'posts.remove'(postId) {
     check(postId, String);
-
-    return Posts.remove(postId);
+    if (Posts.findOne(postId).poster == Meteor.userId())
+      return Posts.remove(postId);
+    else
+      throw new Meteor.Error("unauthorized", "trying to remove post you are not authorized to");
   }
 });

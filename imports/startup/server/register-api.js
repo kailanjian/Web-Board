@@ -9,3 +9,4 @@ import '../../api/posts/server/publications.js';
 import '../../api/profiles/methods.js';
 import '../../api/profiles/server/publications.js';
 
+import './publications.js';

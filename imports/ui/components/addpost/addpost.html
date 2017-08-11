@@ -1,37 +1,40 @@
 <template name="addpost">
-  <div class="container">
-    <div class="col-lg-12">
-      <form id="form-addpost">
-        <label for="link">Link to Site</label>
-        <input type="text" id="input-link" placeholder="http://www.placeholder.com"/>
-        <span class="validate validate-link">
+  <div class="col-lg-12">
+    <form id="form-addpost">
+      <div class="form-group has-feedback">
+        <label class="control-label" for="input-link">Link to Site</label>
+        <input type="text" class="form-control" id="input-link" placeholder="http://www.placeholder.com"/>
+        <span class="glyphicon form-control-feedback
           {{#if isLinkValidating}}
             {{#if isLinkValid}}
-              <i class="glyphicon glyphicon-ok"></i>
+              glyphicon-ok validation-fail
             {{else}}
-              <i class="glyphicon glyphicon-remove"></i>
+              glyphicon-remove validation-success
             {{/if}}
           {{/if}}
+          ">
         </span>
-        <br />
-
-        <label for="image">Preview Image</label>
-        <input type="text" id="input-image" placeholder="http://www.placeholder.com/350x200" />
-          {{#if isPictureValidating}}
+      </div>
+    
+      <div class="form-group has-feedback">
+        <label class="control-label" for="input-image">Preview Image</label>
+        <input type="text" class="form-control" id="input-image" placeholder="http://www.placeholder.com/350x200" />
+        <span class="glyphicon form-control-feedback
+        {{#if isPictureValidating}}
             {{#if isPictureValid}}
-              <i class="glyphicon glyphicon-ok"></i>
+              glyphicon-ok validation-fail
             {{else}}
-              <i class="glyphicon glyphicon-remove"></i>
+              glyphicon-remove validation-success
             {{/if}}
-          {{/if}}
-        <br />
+          {{/if}}"></span>
+      </div>
 
-        <label for="description">Description</label>
-        <input type="text" id="input-description" placeholder="Placeholder Website" />
-        <br />
-
-        <input type="submit" class="btn btn-theme" value="Submit" />
-      </form>
-    </div>
+      <label for="description">Description</label>
+      <br />
+      <input type="text" class="form-control" id="input-description" placeholder="Placeholder Website" />
+      <br />
+      <input type="submit" class="btn btn-theme" value="Submit" />
+    </form>
+    <br />
   </div>
 </template>

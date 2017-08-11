@@ -22,7 +22,10 @@ Meteor.methods({
         const voteCount = Posts.findOne(postId).votes;
         Posts.update(postId, {$set: {votes: voteCount + 1}});
         return Profiles.update({userId: Meteor.userId()}, {$set: {votes: votes.concat([postId])}});
-
+      } else {
+        const voteCount = Posts.findOne(postId).votes;
+        Posts.update(postId, {$set: {votes: voteCount - 1}});
+        return Profiles.update({userId: Meteor.userId()}, {$set: {votes: votes.filter(function(i) {return i != postId})}});
       }
     }
   }

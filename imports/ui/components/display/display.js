@@ -7,31 +7,14 @@ import './display.html'
 
 import 'imagesloaded';
 
+// NOTE:
+// setting this.data.displayFilter = [id of choice] in parent
+// will filter the display by [id of choice]
+
+
 var $grid;
-Template.block.onCreated(function() {
-});
-
-Template.block.onRendered(function() {
-  console.log("rendered block");
-  if (blockCount == 0) {
-    console.log("creating grid...");
-    $grid = $('.grid').isotope({
-      itemSelector: '.grid-item',
-      masonry: {
-        gutter: 20
-      }
-    });
-    console.log($grid);
-  }
-  blockCount++;
-  $grid.imagesLoaded(function() {
-    $grid.isotope("reloadItems").isotope();
-  });
-});
-
 Template.display.onCreated(function() {
   Meteor.subscribe("profiles.user");
-
   blockCount = 0;
 });
 
@@ -46,7 +29,11 @@ Template.display.onRendered(function() {
 
 Template.display.helpers({
   posts() {
-    return Posts.find({});
+    const filter = Blaze.currentView.parentView.templateInstance().data.displayFilter;
+    if (filter)
+      return Posts.find({poster: filter});
+    else
+      return Posts.find({});
   }
 });
 
@@ -65,3 +52,38 @@ Template.display.events({
     });
   }
 })
+
+Template.block.onCreated(function() {
+});
+
+Template.block.onRendered(function() {
+  console.log("rendered block");
+  if (blockCount == 0) {
+    console.log("creating grid...");
+    $grid = $('.grid').isotope({
+      itemSelector: '.grid-item',
+      masonry: {
+        gutter: 10
+      }
+    });
+    console.log($grid);
+  }
+  blockCount++;
+  $grid.imagesLoaded(function() {
+    $grid.isotope("reloadItems").isotope();
+  });
+});
+
+Template.block.helpers({
+  isUserPoster() {
+    return (this.poster == Meteor.userId())
+  },
+  isUserVoter() {
+    if (Profiles.findOne({userId: Meteor.userId()})) {
+      return Profiles.findOne({userId: Meteor.userId()}).votes.includes(this._id);
+    } else {
+      return false;
+    }
+  }
+});
+
